@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master ] # あなたのメインブランチ名（main または master）
+    branches: [ main ] # あなたのメインブランチ名（main または master）
 
 permissions:
   contents: read
