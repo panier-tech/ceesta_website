@@ -1,0 +1,119 @@
+---
+// 連絡先やSNSのデータを定義
+const links = [
+{ name: 'GitHub', url: 'https://github.com/panier-tech', icon: '🐾' }
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="divider">
+      <span class="dot"></span>
+    </div>
+
+    <h3>Contact & Connect</h3>
+    <p class="footer-msg">光の籠（ceesta）へ連絡はこちらから</p>
+
+    <div class="sns-links">
+      {links.map((link) => (
+      <a href={link.url} target="_blank" rel="noopener noreferrer" class="sns-item">
+        <span class="icon">{link.icon}</span>
+        <span class="name">{link.name}</span>
+      </a>
+      ))}
+    </div>
+
+    <p class="copyright">&copy; {new Date().getFullYear()} ceesta. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 60px 20px 30px;
+    background: #0b0c10;
+    /* 背景と同じ漆黒 */
+    text-align: center;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* 上部セクションとの区切り線（光の点をイメージ） */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-cyan);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 300;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+
+  .footer-msg {
+    color: #c5c6c7;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+  }
+
+  /* SNSリンクの並び */
+  .sns-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .sns-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #c5c6c7;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #1f2833;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    background: #12141c;
+  }
+
+  .sns-item:hover {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(102, 252, 241, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .icon {
+    font-size: 1.1rem;
+  }
+
+  .name {
+    font-size: 0.9rem;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+    color: #454545;
+    letter-spacing: 1px;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+interface Props {
+title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="ceestaのホームページ" />
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/jpeg" href="images/ceesta_image_2.jpg" />
+<title>{title}</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="ceesta" />
+<meta property="og:description" content="大切なものを、光の籠に編み込んで。" />
+<meta property="og:image" content="images/ceesta_image_2.png" />
+</head>
+<body>
+<slot />
+</body>
+</html>
+<style is:global>
+:root {
+--bg-color: #0b0c10;
+--text-color: #c5c6c7;
+--accent-gold: #e5c158;
+--accent-cyan: #66fcf1;
+}
+html {
+font-family: 'Hiragino Mincho ProN', 'serif', system-ui, sans-serif;
+background: var(--bg-color);
+color: var(--text-color);
+scroll-behavior: smooth;
+}
+body {
+margin: 0;
+padding: 0;
+overflow-x: hidden;
+}
+</style>
