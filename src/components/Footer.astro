@@ -1,8 +1,9 @@
 ---
 // 連絡先やSNSのデータを定義
 const links = [
-{ name: 'GitHub', url: 'https://github.com/panier-tech', icon: '🐾' },
-{ name: 'Kaggle', url: 'https://www.kaggle.com/ceesta', icon: '📊' }
+  { name: "X", url: "https://twitter.com/ceestas", icon: "🐦" },
+  { name: "GitHub", url: "https://github.com/panier-tech", icon: "🐾" },
+  { name: "Kaggle", url: "https://www.kaggle.com/ceesta", icon: "📊" },
 ];
 ---
 
@@ -16,15 +17,24 @@ const links = [
     <p class="footer-msg">連絡はこちらから</p>
 
     <div class="sns-links">
-      {links.map((link) => (
-      <a href={link.url} target="_blank" rel="noopener noreferrer" class="sns-item">
-        <span class="icon">{link.icon}</span>
-        <span class="name">{link.name}</span>
-      </a>
-      ))}
+      {
+        links.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="sns-item"
+          >
+            <span class="icon">{link.icon}</span>
+            <span class="name">{link.name}</span>
+          </a>
+        ))
+      }
     </div>
 
-    <p class="copyright">&copy; {new Date().getFullYear()} ceesta. All rights reserved.</p>
+    <p class="copyright">
+      &copy; {new Date().getFullYear()} ceesta. All rights reserved.
+    </p>
   </div>
 </footer>
 
@@ -44,7 +54,12 @@ const links = [
   /* 上部セクションとの区切り線（光の点をイメージ） */
   .divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--accent-gold),
+      transparent
+    );
     margin-bottom: 40px;
     position: relative;
   }
