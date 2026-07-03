@@ -6,7 +6,7 @@
             <img src="images/ceesta_image_2.png" alt="ceesta Icon" class="avatar" />
         </div>
         <h1>ceesta</h1>
-        <p class="tagline">大切なものを、光の籠に編み込んで。</p>
+        <p class="tagline">光の籠と旅路。</p>
     </div>
 </section>
 <style>
@@ -53,5 +53,76 @@
         font-size: 1.1rem;
         color: var(--accent-cyan);
         letter-spacing: 2px;
+    }
+
+    .avatar-container {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 24px;
+        border-radius: 50%;
+        padding: 3px;
+        /* 背景グラデーションをより鮮やかに */
+        background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+        position: relative;
+        overflow: visible;
+        /* 外側に光を漏らすために必須 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* 静止時のほのかな光 */
+        box-shadow: 0 0 30px rgba(102, 252, 241, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.1);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 裏側で密かに脈打つ「光の籠（オーラ）」を擬似要素で追加 */
+    .avatar-container::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+        z-index: -1;
+        opacity: 0.3;
+        filter: blur(12px);
+        /* 輪郭をぼかして光の広がりを表現 */
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #0b0c10;
+        /* 画像の背景が透けた時用のディープブラック */
+        border: 2px solid #0b0c10;
+        /* グラデーションの枠と画像の間に一筋の黒線を挟んで際立たせる */
+        z-index: 2;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ✨ マウスを乗せたとき（Hover）の幻想的なエフェクト */
+    .hero-content:hover .avatar-container {
+        transform: scale(1.03);
+        /* わずかに膨張 */
+        /* シアンとゴールドの光が混ざり合って強く輝く */
+        box-shadow:
+            0 0 40px rgba(102, 252, 241, 0.4),
+            0 0 70px rgba(212, 175, 55, 0.2);
+    }
+
+    .hero-content:hover .avatar-container::before {
+        opacity: 0.8;
+        transform: scale(1.1);
+        /* 光の余韻がフワッと外側に広がる */
+        filter: blur(20px);
+    }
+
+    .hero-content:hover .avatar {
+        transform: scale(0.98);
+        /* 枠の中で画像だけがわずかに引き締まり、立体感を生む */
     }
 </style>

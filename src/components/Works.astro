@@ -1,91 +1,245 @@
 ---
 const projects = [
-{ title: "Idea & Concept", desc: "心に浮かんだ色彩や形、言葉の記録", tag: "Creative" },
-{ title: "Selected Works", desc: "光を紡ぐ", tag: "Portfolio" },
-{ title: "JourneyLog", desc: "cesta(道・旅)の途中で出会った景色や記憶", tag: "Blog" }
+{
+phase: "Phase 01",
+title: "LLM-driven Factorio Player",
+subtitle: "大規模言語モデルによる状況認識とゲームプレイ制御の実現",
+description:
+"ゲーム内の状況を構造化テキストとして抽出し、LLM（大規模言語モデル）の推論能力を用いて次の最適な行動を決定・実行させる基盤システム。人間のような思考プロセスで『Factorio』の初期プレイを成立させることに成功。",
+tags: ["LLM", "Prompt Engineering", "Python", "API Integration"],
+status: "Success"
+},
+{
+phase: "Phase 02",
+title: "Fully Autonomous Factorio AI",
+subtitle: "完全自律プレイを目指す多層型AIエージェントの開発",
+description:
+"リソース管理、ラインの最適化、防衛など、複雑なマルチタスクが要求される環境で、人間の介入なしに完全自律で工場を拡張し続けるAIを開発中。長期的な計画（Planning）と即時的な実行（Execution）を両立するエージェントアーキテクチャに挑む。",
+tags: ["Reinforcement Learning", "Agent Architecture", "Autonomous"],
+status: "In Progress"
+},
+{
+phase: "Phase 03",
+title: "Factorio Environment Wrapper",
+subtitle: "AIのさらなる高機能化とMod環境にも適応可能なラッパーの開発",
+description: "Factorioのゲーム環境を抽象化し、AIがより高度な戦略を学習・実行できるようにするためのラッパーを開発。Mod環境にも対応し、AIが多様なゲームシナリオに適応可能なデータパイプラインを構築する。",
+tags: ["Computer Vision", "Lua (Modding)", "Data Pipeline"],
+status: "Infrastructure"
+}
 ];
 ---
-<section id="works" class="works">
+
+<section id="works" class="works-section">
     <div class="container">
-        <h2>Works & Contents</h2>
-        <div class="grid">
-            {projects.map((project) => (
-            <div class="card">
-                <span class="tag">{project.tag}</span>
-                <h3>{project.title}</h3>
-                <p>{project.desc}</p>
-            </div>
-            ))}
+
+        <div class="context-chapter">
+            <span class="chapter-number">01 / Concept</span>
+            <h2 class="chapter-title">Projects</h2>
+            <p class="chapter-lead">
+                現在『Factorio』を、人間の介入なしに完全自律で攻略するAIエージェントの構築を進めています。
+            </p>
         </div>
+
+        <hr class="chapter-divider" />
+
+        <div class="projects-chapter">
+            <div class="chapter-header">
+                <span class="chapter-number">02 / Core Projects</span>
+                <h2 class="chapter-title">Phases of Automation</h2>
+                <p class="section-subtitle">Bringing order to chaos through autonomous architecture.</p>
+            </div>
+
+            <div class="projects-grid">
+                {projects.map((project) => (
+                <div class="project-card">
+                    <div class="card-header">
+                        <span class="phase-indicator">{project.phase}</span>
+                        <span class={`status-badge ${project.status.toLowerCase().replace(" ", " -")}`}>
+                            {project.status}
+                        </span>
+                    </div>
+
+                    <h3 class="project-title">{project.title}</h3>
+                    <h4 class="project-subtitle">{project.subtitle}</h4>
+                    <p class="project-description">{project.description}</p>
+
+                    <div class="tags-container">
+                        {project.tags.map((tag) => (
+                        <span class="tech-tag">{tag}</span>
+                        ))}
+                    </div>
+                </div>
+                ))}
+            </div>
+        </div>
+
     </div>
 </section>
+
 <style>
-    .works {
+    .works-section {
         padding: 100px 20px;
-        background: #12141c;
+        background: transparent;
+        color: #fafafa;
     }
 
     .container {
         max-width: 1000px;
+        /* 少し横幅を絞って読みやすく */
         margin: 0 auto;
-
     }
 
-    h2 {
-        text-align: center;
+    /* 章立ての共通スタイル */
+    .chapter-number {
+        font-family: monospace;
+        font-size: 0.85rem;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .chapter-title {
         font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        letter-spacing: 0.02em;
         color: #fff;
+    }
+
+    /* 01: コンセプト章のリード文 */
+    .context-chapter {
         margin-bottom: 60px;
+    }
+
+    .chapter-lead {
+        font-size: 1.05rem;
+        color: #cbd5e1;
+        line-height: 1.8;
+        max-width: 700px;
         font-weight: 300;
     }
 
-    .grid {
-        display: block;
+    /* 章の区切り線 */
+    .chapter-divider {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin: 60px 0;
     }
 
-    .card {
-        background: #1f2833;
-        border: 1px solid transparent;
+    /* 02: プロジェクト章 */
+    .projects-chapter {
+        margin-top: 40px;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        color: #64748b;
+        margin-bottom: 48px;
+        font-style: italic;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+    }
+
+    /* カードデザイン */
+    .project-card {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
         border-radius: 12px;
-        padding: 30px;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(30, 41, 59, 0.4);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 20px;
-        transition: all 0.4s ease;
-        cursor: pointer;
-        position: relative;
     }
 
-    .card:hover {
-        border-color: var(--accent-gold);
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(229, 193, 88, 0.1);
-    }
-
-    .tag {
+    .phase-indicator {
+        font-family: monospace;
         font-size: 0.8rem;
-        color: var(--accent-cyan);
+        color: #94a3b8;
+        letter-spacing: 0.05em;
+    }
+
+    .status-badge {
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 2px 10px;
+        border-radius: 20px;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.05em;
     }
 
-    h3 {
-        font-size: 1.4rem;
+    .status-badge.success {
+        background: rgba(34, 197, 94, 0.05);
+        color: #4ade80;
+        border: 1px solid rgba(34, 197, 94, 0.15);
+    }
+
+    .status-badge.in-progress {
+        background: rgba(59, 130, 246, 0.05);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .status-badge.infrastructure {
+        background: rgba(148, 163, 184, 0.05);
+        color: #cbd5e1;
+        border: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .project-title {
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin-bottom: 6px;
         color: #fff;
-        margin: 10px 0;
+    }
+
+    .project-subtitle {
+        font-size: 0.85rem;
         font-weight: 400;
+        color: #64748b;
+        margin-bottom: 16px;
+        line-height: 1.4;
     }
 
-    p {
-        color: #max-width;
-        margin: 0;
-        font-size: 1rem;
+    .project-description {
+        font-size: 0.9rem;
+        color: #94a3b8;
+        line-height: 1.6;
+        margin-bottom: 24px;
+        flex-grow: 1;
     }
 
-    /* スマホ画面（幅768px以下）での見え方を調整 */
-    @media (max-width: 768px) {
-        .grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tech-tag {
+        font-size: 0.75rem;
+        background: rgba(255, 255, 255, 0.02);
+        color: #64748b;
+        padding: 2px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
     }
 </style>

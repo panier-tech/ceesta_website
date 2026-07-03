@@ -1,43 +1,179 @@
 ---
+// スキルセットやデータにKaggleを追加
+const skills = [
+{ category: "Core Tech", items: ["Python"] },
+{ category: "AI & Data Science", items: ["LLM Integration", "Reinforcement Learning", "Kaggle"] },
+{ category: "Interests", items: ["Automation Systems", "Complex Simulations", "Predictive Modeling"] }
+];
 ---
-<section id="about" class="about">
+
+<section id="about" class="about-section">
     <div class="container">
-        <h2>About ceesta</h2>
-        <p>私の活動の原点は、チェコ語などで「旅・道」を意味する <em>cesta</em>、そして何かを大切に包み込む「籠」としての <em>cesta</em> からきています。</p>
-        <p>この場所は、私が日々の中で集めたアイデアや、出会った素敵なヒト・モノ・コトを優しく編み込み、保管する籠のような空間です。</p>
+
+        <div class="chapter-header">
+            <span class="chapter-number">00 / Profile</span>
+            <h2 class="chapter-title">About Me</h2>
+        </div>
+
+        <div class="about-grid">
+            <div class="profile-text">
+                <p class="greeting">
+                    こんにちは、<strong>ceesta</strong> です。
+                </p>
+                <p class="bio">
+                    情報系の技術者・リサーチャーとして、自動化（Automation）と自律型システム（Autonomous Systems）の可能性を追求しています。
+                </p>
+                <p class="philosophy">
+                    「複雑で巨大なシステムを、自律的に機能させること」に強い興味を持っています。その探求の場として、現在はシミュレーションゲーム『Factorio』を舞台に、LLM（大規模言語モデル）を用いない完全自律型AIエージェントの開発に取り組んでいます。
+                </p>
+                <p class="kaggle-story">
+                    また、理論やアルゴリズムの実践的な応用、そしてデータから鋭い洞察を導き出すアプローチとして、Kaggleをはじめとするデータ分析コンペティションにも挑戦しています。
+                </p>
+                <p class="closing">
+                    ただ効率的なコードを書くだけでなく、システムの裏にある「美しさ」や「一貫性」を大切にしながら、日々新しい技術と向き合っています。
+                </p>
+            </div>
+
+            <div class="profile-meta">
+                <div class="meta-card">
+                    <h3 class="meta-title">Focus & Toolbox</h3>
+                    <div class="skills-stack">
+                        {skills.map((skill) => (
+                        <div class="skill-group">
+                            <span class="group-label">{skill.category}</span>
+                            <div class="tags-container">
+                                {skill.items.map((item) => (
+                                <span class="skill-tag">{item}</span>
+                                ))}
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
+
 <style>
-    .about {
-        padding: 100px 20px;
-        background: #0b0c10;
+    .about-section {
+        padding: 100px 20px 60px 20px;
+        background: transparent;
+        color: #fafafa;
     }
 
     .container {
-        max-width: 800px;
+        max-width: 1000px;
         margin: 0 auto;
-        text-align: center;
     }
 
-    h2 {
+    .chapter-number {
+        font-family: monospace;
+        font-size: 0.85rem;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .chapter-title {
         font-size: 2rem;
-        color: #fff;
+        font-weight: 700;
         margin-bottom: 40px;
-        font-weight: 300;
-        letter-spacing: 2px;
+        letter-spacing: 0.02em;
+        color: #fff;
     }
 
-    p {
+    /* グリッドレイアウト */
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: start;
+    }
 
+    @media (max-width: 768px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+    }
+
+    /* 左側：自己紹介文章 */
+    .profile-text {
+        font-size: 1rem;
+        color: #cbd5e1;
+        line-height: 1.8;
+    }
+
+    .profile-text p {
+        margin-bottom: 20px;
+    }
+
+    .greeting {
+        font-size: 1.2rem;
+        color: #fff;
+    }
+
+    .greeting strong {
+        background: linear-gradient(45deg, #fff, #94a3b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    /* 右側：スキルカード（グラスモルフィズム） */
+    .meta-card {
+        background: rgba(30, 41, 59, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border-radius: 12px;
+        padding: 32px;
+    }
+
+    .meta-title {
         font-size: 1.1rem;
-        line-height: 2;
+        font-weight: 600;
+        color: #fff;
         margin-bottom: 24px;
-        color: #c5c6c7;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 12px;
     }
 
-    em {
-        font-style: normal;
-        color: var(--accent-gold);
-        font-weight: bold;
+    .skill-group {
+        margin-bottom: 20px;
+    }
+
+    .skill-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .group-label {
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: #64748b;
+        display: block;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .skill-tag {
+        font-size: 0.8rem;
+        background: rgba(255, 255, 255, 0.02);
+        color: #94a3b8;
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
     }
 </style>
