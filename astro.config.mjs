@@ -1,15 +1,12 @@
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite'; // 環境によってインポート文が異なる場合がありますが、既存のものに合わせてください
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // 1. GitHubの配信用URL（独自ドメインの場合）
+  // 1. GitHubの配信用URL（独自ドメイン）
   site: 'https://ceesta.net',
 
-  // 2. リポジトリ名（リポジトリ名が ceesta_website の場合）
-  base: '/ceesta_website/',
-
-  // 3. 元からあったViteとTailwindの設定（カンマで区切って並べます）
+  // 3. ViteとTailwindの設定
   vite: {
     plugins: [tailwindcss()]
   }
