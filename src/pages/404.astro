@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sitePath } from '../lib/articles';
+---
+<BaseLayout title="ページが見つかりません | ceesta.net" description="お探しのページは見つかりませんでした。" canonicalPath="/404.html">
+	<h1>ページが見つかりません</h1>
+	<p>URLが変更されたか、ページが削除された可能性があります。</p>
+	<p><a href={sitePath('/')}>トップページへ戻る</a></p>
+</BaseLayout>

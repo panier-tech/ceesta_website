@@ -1,0 +1,36 @@
+---
+import type { Article } from '../lib/articles';
+import BaseLayout from './BaseLayout.astro';
+import ArticleMeta from '../components/ArticleMeta.astro';
+import TagList from '../components/TagList.astro';
+import { articleSlug, sitePath } from '../lib/articles';
+interface Props { article: Article; Content: any; headings: { depth: number; slug: string; text: string }[] }
+const { article, Content, headings } = Astro.props;
+---
+<BaseLayout title={`${article.data.title} | ceesta.net`} description={article.data.description} canonicalPath={`/articles/${articleSlug(article)}/`} breadcrumbs={[{ label: 'HOME', href: sitePath('/') }, { label: '記事', href: sitePath('/articles/') }, { label: article.data.title }]}>
+	<article class="article-layout">
+		<header class="article-header">
+			<h1>{article.data.title}</h1>
+			<ArticleMeta pubDate={article.data.pubDate} updatedDate={article.data.updatedDate} />
+			<TagList tags={article.data.tags} />
+		</header>
+		{headings.length > 0 && <nav class="table-of-contents" aria-label="目次"><strong>目次</strong><ol>{headings.filter((heading) => heading.depth === 2 || heading.depth === 3).map((heading) => <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav>}
+		<div class="prose"><Content /></div>
+		<footer class="article-footer">著者 ceesta</footer>
+	</article>
+</BaseLayout>
+<script>
+	document.querySelectorAll<HTMLElement>('.prose pre').forEach((pre) => {
+		pre.classList.add('copyable-code');
+		const button = document.createElement('button');
+		button.type = 'button'; button.className = 'copy-code'; button.textContent = 'コピー';
+		button.setAttribute('aria-label', 'コードをコピー');
+		button.addEventListener('click', async () => {
+			const code = pre.querySelector('code')?.innerText ?? pre.innerText.replace(/\n?コピー$/, '');
+			await navigator.clipboard.writeText(code);
+			button.textContent = 'コピーしました';
+			window.setTimeout(() => { button.textContent = 'コピー'; }, 1500);
+		});
+		pre.append(button);
+	});
+</script>

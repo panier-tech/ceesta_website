@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleListItem from '../components/ArticleListItem.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { publicArticles } from '../lib/articles';
+const articles = publicArticles(await getCollection('articles'));
+---
+<BaseLayout title="ceesta.net" description="ceesta が学んだことや取り組んだことを記録するサイトです。">
+	<header class="page-intro"><h1>ceesta.net</h1><p>創る、繋げる。</p></header>
+	{articles.length > 0 ? <ul class="article-list">{articles.map((article) => <ArticleListItem article={article} />)}</ul> : <p>記事はまだありません。</p>}
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+import type { Article } from '../lib/articles';
+import { articleSlug, sitePath } from '../lib/articles';
+import ArticleMeta from './ArticleMeta.astro';
+import TagList from './TagList.astro';
+interface Props { article: Article }
+const { article } = Astro.props;
+---
+<li class="article-list-item">
+	<h2><a href={sitePath(`/articles/${articleSlug(article)}/`)}>{article.data.title}</a></h2>
+	<p>{article.data.description}</p>
+	<ArticleMeta pubDate={article.data.pubDate} updatedDate={article.data.updatedDate} />
+	<TagList tags={article.data.tags} />
+</li>

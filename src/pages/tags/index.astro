@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { publicArticles, tagSlug, validateTagSlugs, sitePath } from '../../lib/articles';
+const articles = publicArticles(await getCollection('articles'));
+const tags = validateTagSlugs(articles);
+---
+<BaseLayout title="タグ一覧 | ceesta.net" description="記事のタグ一覧です。" canonicalPath="/tags/" breadcrumbs={[{ label: 'HOME', href: sitePath('/') }, { label: 'タグ一覧' }]}>
+	<header class="page-intro"><h1>タグ一覧</h1><p>タグから記事を探せます。</p></header>
+	{tags.size ? <ul class="tag-list tag-directory">{[...tags.entries()].sort((a, b) => a[1].localeCompare(b[1], 'ja')).map(([slug, name]) => <li><a href={sitePath(`/tags/${slug}/`)}><svg class="tag-icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M2 2h5l7 7-5 5-7-7V2Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="5" cy="5" r=".8" fill="currentColor"/></svg>{name}</a></li>)}</ul> : <p>タグはまだありません。</p>}
+</BaseLayout>

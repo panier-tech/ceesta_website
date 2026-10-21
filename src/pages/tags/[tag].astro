@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleListItem from '../../components/ArticleListItem.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { publicArticles, tagSlug, validateTagSlugs, sitePath } from '../../lib/articles';
+export async function getStaticPaths() {
+	const articles = publicArticles(await getCollection('articles'));
+	const tags = validateTagSlugs(articles);
+	return [...tags.entries()].map(([slug, name]) => ({ params: { tag: slug }, props: { name, articles: articles.filter((article) => article.data.tags.some((tag) => tagSlug(tag) === slug)) } }));
+}
+const { name, articles } = Astro.props;
+---
+<BaseLayout title={`${name} の記事 | ceesta.net`} description={`「${name}」タグの記事一覧です。`} canonicalPath={sitePath(`/tags/${Astro.params.tag}/`)} breadcrumbs={[{ label: 'HOME', href: sitePath('/') }, { label: 'タグ一覧', href: sitePath('/tags/') }, { label: name }]}>
+	<header class="page-intro"><h1>タグ: {name}</h1><p><a href={sitePath('/tags/')}>すべてのタグ</a></p></header>
+	<ul class="article-list">{articles.map((article) => <ArticleListItem article={article} />)}</ul>
+</BaseLayout>

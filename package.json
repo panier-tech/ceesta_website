@@ -1,0 +1,19 @@
+{
+  "name": "ceesta-homepage",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.22.0",
+    "npm": ">=9.6.5"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro sync",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.4.1"
+  }
+}

@@ -1,0 +1,46 @@
+---
+import { sitePath } from '../lib/articles';
+---
+<header class="site-header">
+	<div class="site-shell header-inner">
+		<a class="site-name" href={sitePath('/')}>ceesta.net</a>
+		<div class="menu">
+			<button class="menu-trigger" type="button" aria-label="メニューを開く" aria-expanded="false"><span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span></button>
+			<nav class="menu-links" aria-label="サイトメニュー">
+				<a href={sitePath('/')}><span class="menu-copy"><strong>HOME</strong><small>ホーム</small></span><span class="menu-arrow" aria-hidden="true">↗</span></a>
+				<a href={sitePath('/tags/')}><span class="menu-copy"><strong>TAGS</strong><small>タグ一覧</small></span><span class="menu-arrow" aria-hidden="true">↗</span></a>
+				<a href={sitePath('/about/')}><span class="menu-copy"><strong>ABOUT</strong><small>自己紹介</small></span><span class="menu-arrow" aria-hidden="true">↗</span></a>
+				<button class="theme-toggle" type="button" aria-pressed="false"><span class="menu-copy"><strong>THEME</strong><small>ダークモード</small></span></button>
+			</nav>
+		</div>
+	</div>
+</header>
+<script>
+	const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
+	function updateThemeButton() {
+		const dark = document.documentElement.dataset.theme === 'dark';
+		if (toggle) { toggle.setAttribute('aria-pressed', String(dark)); const label = toggle.querySelector('small'); if (label) label.textContent = dark ? 'ライトモード' : 'ダークモード'; }
+	}
+	updateThemeButton();
+	toggle?.addEventListener('click', () => {
+		const dark = document.documentElement.dataset.theme !== 'dark';
+		document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+		localStorage.setItem('theme', dark ? 'dark' : 'light');
+		updateThemeButton();
+	});
+	const menu = document.querySelector<HTMLElement>('.menu');
+	const menuButton = menu?.querySelector<HTMLButtonElement>('.menu-trigger');
+	function setMenuOpen(isOpen: boolean) {
+		menu?.classList.toggle('is-open', isOpen);
+		menuButton?.setAttribute('aria-expanded', String(isOpen));
+		menuButton?.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+		document.body.classList.toggle('menu-is-open', isOpen);
+	}
+	menuButton?.addEventListener('click', () => setMenuOpen(menu?.classList.contains('is-open') !== true));
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && menu?.classList.contains('is-open')) setMenuOpen(false);
+	});
+	menu?.querySelectorAll<HTMLAnchorElement>('.menu-links a').forEach((link) => {
+		link.addEventListener('click', () => setMenuOpen(false));
+	});
+</script>

@@ -1,0 +1,9 @@
+---
+interface Props { pubDate: Date; updatedDate?: Date }
+const { pubDate, updatedDate } = Astro.props;
+const formatDate = (date: Date) => new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long', timeZone: 'UTC' }).format(date);
+---
+<div class="meta">
+	<time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+	{updatedDate && <span>更新 <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time></span>}
+</div>

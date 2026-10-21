@@ -1,0 +1,47 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { sitePath } from '../lib/articles';
+import '../styles/tokens.css';
+import '../styles/global.css';
+interface Crumb { label: string; href?: string }
+interface Props { title: string; description: string; canonicalPath?: string; breadcrumbs?: Crumb[] }
+const { title, description, canonicalPath = Astro.url.pathname, breadcrumbs } = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL, '').split('/').filter(Boolean);
+const inferred = path.length ? [{ label: 'HOME', href: sitePath('/') }, ...path.map((part, index) => {
+	const label = part === 'about' ? 'プロフィール' : part === 'tags' ? 'タグ一覧' : part === 'articles' ? '記事' : part.replace(/-/g, ' ');
+	return { label: index === path.length - 1 ? (breadcrumbs?.at(-1)?.label ?? label) : label, href: index === path.length - 1 ? undefined : sitePath(`/${path.slice(0, index + 1).join('/')}/`) };
+})] : [];
+const crumbs = breadcrumbs ?? inferred;
+---
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<script is:inline>
+			try {
+				const theme = localStorage.getItem('theme');
+				if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
+				else if (theme === 'light') document.documentElement.dataset.theme = 'light';
+			} catch {}
+		</script>
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="ceesta.net" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
+	</head>
+	<body>
+		<Header />
+		{crumbs.length > 0 && <nav class="breadcrumbs site-shell" aria-label="パンくずリスト"><ol>{crumbs.map((crumb) => <li>{crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}</li>)}</ol></nav>}
+		<main class="site-shell"><slot /></main>
+		<Footer />
+	</body>
+</html>
