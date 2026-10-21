@@ -55,8 +55,3 @@ draft: false
 
 サイトは `https://ceesta.net` を設定済みです。独自ドメインを使う場合は GitHub Pages の Custom domain に `ceesta.net` を設定し、DNS を GitHub Pages に向けてください。プロジェクトサイトのサブパスで公開する場合は `astro.config.mjs` の `base` をリポジトリ名に合わせて設定してください。
 
-## 公開前に確認すること
-
-- About ページの仮文面を本人の紹介に差し替える
-- サンプル記事 2 件を実際の記事に差し替えるか削除する
-- 公開リポジトリ、GitHub Pages、独自ドメイン、DNS の設定を確認する

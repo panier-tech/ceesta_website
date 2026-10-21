@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="プロフィール | ceesta.net" description="ceesta.net と運営者について。">
+<BaseLayout title="プロフィール | ceesta.net" description="サイト運営者 ceesta のプロフィールです。">
 	<header class="page-intro"><h1>プロフィール</h1></header>
-	<p>ここには運営者 ceesta の紹介を掲載します。公開前に、本人の言葉でプロフィールやこのサイトを始めた理由に差し替えてください。</p>
+	<section aria-labelledby="profile-name">
+		<h2 id="profile-name">ceesta</h2>
+		<p>サイト運営者</p>
+		<p>普段はFreeBSDのカーネルと戦っています。</p>
+		<p>技術のことを中心に、興味を持ったことや試したことを書いています。</p>
+	</section>
 </BaseLayout>
