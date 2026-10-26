@@ -1,12 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+
 <BaseLayout title="プロフィール | ceesta.net" description="サイト運営者 ceesta のプロフィールです。">
-	<header class="page-intro"><h1>プロフィール</h1></header>
+	<header class="page-intro">
+		<h1>プロフィール</h1>
+	</header>
+
 	<section aria-labelledby="profile-name">
 		<h2 id="profile-name">ceesta</h2>
 		<p>サイト運営者</p>
-		<p>普段はFreeBSDのカーネルと戦っています。</p>
-		<p>技術のことを中心に、興味を持ったことや試したことを書いています。</p>
+		<p>わりとなんでもやってる人</p>
+
+		<ul>
+			<li>vimmer</li>
+			<li>FreeBSD user</li>
+			<li>工場ゲーム好き</li>
+		</ul>
+
+		<dl>
+			<dt>Home</dt>
+			<dd><a href="https://ceesta.net">https://ceesta.net</a></dd>
+
+			<dt>GitHub</dt>
+			<dd><a href="https://github.com/panier-tech">panier-tech</a></dd>
+
+			<dt>BlueSky</dt>
+			<dd><a href="https://bsky.app/profile/canastella.bsky.social">@canastella.bsky.social</a></dd>
+
+			<dt>X</dt>
+			<dd><a href="https://x.com/ceestas">@ceestas</a></dd>
+		</dl>
 	</section>
 </BaseLayout>

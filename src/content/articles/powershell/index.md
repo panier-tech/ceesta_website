@@ -4,7 +4,7 @@ description: "PowerShellをLinuxで使う。"
 pubDate: 2026-10-21
 order: 10
 tags:
-  - 書き方
+  - Shell
 draft: false
 ---
 
